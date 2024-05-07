@@ -1,0 +1,13 @@
+# ide
+.idea/
+.vscode/
+
+# mac
+.DS_Store
+
+# parcel
+.parcel-cache
+
+# local
+/dist
+/node_modules

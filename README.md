@@ -126,7 +126,7 @@ If the creation date is set as 9:00AM on January 15th 2000, then inserting this 
 <p class="cdate">01/15/2000 : 09:00</p>
 ```
 
-For a list of available date and time formats, see: [Reference Date/Time formats](#reference-date-time-formats).
+For a list of available date and time formats, see: [Reference Date/Time formats](#reference-datetime-formats).
 
 ### `template_mdate_classes`
 
@@ -177,7 +177,7 @@ If the date modified is set as 9:00AM on January 15th 2000, then inserting this 
 <p class="mdate">01/15/2000 : 09:00</p>
 ```
 
-For a list of available date and time formats, see: [Reference Date/Time formats](#reference-date-time-formats).
+For a list of available date and time formats, see: [Reference Date/Time formats](#reference-datetime-formats).
 
 ### `template_replace_values`
 

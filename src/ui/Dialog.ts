@@ -1,16 +1,15 @@
-import { Arr, Optional } from '@ephox/katamari';
-
-import Editor from 'tinymce/core/api/Editor';
-import Env from 'tinymce/core/api/Env';
-import { Dialog } from 'tinymce/core/api/ui/Ui';
-import Tools from 'tinymce/core/api/util/Tools';
-
+import type { Editor, Ui } from 'tinymce';
+import * as Arr from '../api/Arr';
+import { Optional } from '../api/Optional';
 import * as Options from '../api/Options';
 import * as Templates from '../core/Templates';
 import { DialogData, ExternalTemplate, InternalTemplate, UrlTemplate } from '../core/Types';
 import * as Utils from '../core/Utils';
 
-type UpdateDialogCallback = (dialogApi: Dialog.DialogInstanceApi<DialogData>, template: InternalTemplate, previewHtml: string) => void;
+const { Env } = tinymce;
+const { Tools } = tinymce.util;
+
+type UpdateDialogCallback = (dialogApi: Ui.Dialog.DialogInstanceApi<DialogData>, template: InternalTemplate, previewHtml: string) => void;
 
 const getPreviewContent = (editor: Editor, html: string): string => {
   let previewHtml = Utils.parseAndSerialize(editor, html);
@@ -98,7 +97,7 @@ const open = (editor: Editor, templateList: ExternalTemplate[]): void => {
 
   const findTemplate = (templates: InternalTemplate[], templateTitle: string) => Arr.find(templates, (t) => t.text === templateTitle);
 
-  const loadFailedAlert = (api: Dialog.DialogInstanceApi<DialogData>) => {
+  const loadFailedAlert = (api: Ui.Dialog.DialogInstanceApi<DialogData>) => {
     editor.windowManager.alert('Could not load the specified template.', () => api.focus('template'));
   };
 
@@ -109,7 +108,7 @@ const open = (editor: Editor, templateList: ExternalTemplate[]): void => {
     );
 
   const onChange = (templates: InternalTemplate[], updateDialog: UpdateDialogCallback) =>
-    (api: Dialog.DialogInstanceApi<DialogData>, change: { name: string }) => {
+    (api: Ui.Dialog.DialogInstanceApi<DialogData>, change: { name: string }) => {
       if (change.name === 'template') {
         const newTemplateTitle = api.getData().template;
         findTemplate(templates, newTemplateTitle).each((t) => {
@@ -125,7 +124,7 @@ const open = (editor: Editor, templateList: ExternalTemplate[]): void => {
       }
     };
 
-  const onSubmit = (templates: InternalTemplate[]) => (api: Dialog.DialogInstanceApi<DialogData>) => {
+  const onSubmit = (templates: InternalTemplate[]) => (api: Ui.Dialog.DialogInstanceApi<DialogData>) => {
     const data = api.getData();
     findTemplate(templates, data.template).each((t) => {
       getTemplateContent(t).then((previewHtml) => {
@@ -141,7 +140,7 @@ const open = (editor: Editor, templateList: ExternalTemplate[]): void => {
   const openDialog = (templates: InternalTemplate[]) => {
     const selectBoxItems = createSelectBoxItems(templates);
 
-    const buildDialogSpec = (bodyItems: Dialog.BodyComponentSpec[], initialData: DialogData): Dialog.DialogSpec<DialogData> => ({
+    const buildDialogSpec = (bodyItems: Ui.Dialog.BodyComponentSpec[], initialData: DialogData): Ui.Dialog.DialogSpec<DialogData> => ({
       title: 'Insert Template',
       size: 'large',
       body: {
@@ -166,9 +165,9 @@ const open = (editor: Editor, templateList: ExternalTemplate[]): void => {
       onChange: onChange(templates, updateDialog)
     });
 
-    const updateDialog = (dialogApi: Dialog.DialogInstanceApi<DialogData>, template: InternalTemplate, previewHtml: string) => {
+    const updateDialog = (dialogApi: Ui.Dialog.DialogInstanceApi<DialogData>, template: InternalTemplate, previewHtml: string) => {
       const content = getPreviewContent(editor, previewHtml);
-      const bodyItems: Dialog.BodyComponentSpec[] = [
+      const bodyItems: Ui.Dialog.BodyComponentSpec[] = [
         {
           type: 'listbox',
           name: 'template',

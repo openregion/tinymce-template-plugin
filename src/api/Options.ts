@@ -1,9 +1,6 @@
-import { Type } from '@ephox/katamari';
-
-import Editor from 'tinymce/core/api/Editor';
-import { EditorOptions } from 'tinymce/core/api/OptionTypes';
-
+import type { Editor, EditorOptions } from 'tinymce';
 import { ExternalTemplate, TemplateValues } from '../core/Types';
+import * as Type from './Type';
 
 type TemplateCallback = (callback: (templates: ExternalTemplate[]) => void) => void;
 

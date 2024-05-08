@@ -1,4 +1,4 @@
-import Editor from 'tinymce/core/api/Editor';
+import type { Editor } from 'tinymce';
 
 const addZeros = (value: string | number, len: number): string => {
   value = '' + value;

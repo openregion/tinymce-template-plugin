@@ -1,8 +1,8 @@
-import { Arr, Obj } from '@ephox/katamari';
+import type { Editor, DOMUtils } from 'tinymce';
+import * as Arr from '../api/Arr';
+import * as Obj from '../api/Obj';
 
-import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
-import Editor from 'tinymce/core/api/Editor';
-import HtmlSerializer from 'tinymce/core/api/html/Serializer';
+const HtmlSerializer = tinymce.html.Serializer;
 
 const entitiesAttr: Record<string, string> = {
   '"': '&quot;',

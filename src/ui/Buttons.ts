@@ -1,7 +1,6 @@
-import Editor from 'tinymce/core/api/Editor';
-import { Menu, Toolbar } from 'tinymce/core/api/ui/Ui';
+import type { Editor, Ui } from 'tinymce';
 
-const onSetupEditable = (editor: Editor) => (api: Toolbar.ToolbarButtonInstanceApi | Menu.MenuItemInstanceApi): VoidFunction => {
+const onSetupEditable = (editor: Editor) => (api: Ui.Toolbar.ToolbarButtonInstanceApi | Ui.Menu.MenuItemInstanceApi): VoidFunction => {
   const nodeChanged = () => {
     api.setEnabled(editor.selection.isEditable());
   };

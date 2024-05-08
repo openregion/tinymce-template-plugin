@@ -1,7 +1,4 @@
-import { Fun } from '@ephox/katamari';
-
-import Editor from 'tinymce/core/api/Editor';
-
+import type { Editor } from 'tinymce';
 import * as Templates from '../core/Templates';
 import { ExternalTemplate } from '../core/Types';
 import * as Dialog from '../ui/Dialog';
@@ -11,7 +8,10 @@ const showDialog = (editor: Editor) => (templates: ExternalTemplate[]): void => 
 };
 
 const register = (editor: Editor): void => {
-  editor.addCommand('mceInsertTemplate', Fun.curry(Templates.insertTemplate, editor));
+  editor.addCommand(
+    'mceInsertTemplate',
+    (_ui: boolean, html: string) => Templates.insertTemplate(editor, _ui, html),
+  );
   editor.addCommand('mceTemplate', Templates.createTemplateList(editor, showDialog(editor)));
 };
 

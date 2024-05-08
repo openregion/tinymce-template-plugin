@@ -1,12 +1,12 @@
-import { Regex, Type } from '@ephox/katamari';
-
-import Editor from 'tinymce/core/api/Editor';
-import Tools from 'tinymce/core/api/util/Tools';
-
+import type { Editor } from 'tinymce';
 import * as Options from '../api/Options';
+import * as Regex from '../api/Regex';
+import * as Type from '../api/Type';
 import * as DateTimeHelper from './DateTimeHelper';
-import { ExternalTemplate, TemplateValues } from './Types';
+import type { ExternalTemplate, TemplateValues } from './Types';
 import { hasAnyClasses, parseAndSerialize } from './Utils';
+
+const { Tools } = tinymce.util;
 
 const createTemplateList = (editor: Editor, callback: (templates: ExternalTemplate[]) => void) => {
   return (): void => {

@@ -1,10 +1,10 @@
-import Editor from 'tinymce/core/api/Editor';
-import Tools from 'tinymce/core/api/util/Tools';
-
+import type { Editor } from 'tinymce';
 import * as Options from '../api/Options';
 import * as DateTimeHelper from './DateTimeHelper';
 import * as Templates from './Templates';
 import { hasAnyClasses } from './Utils';
+
+const { Tools } = tinymce.util;
 
 const setup = (editor: Editor): void => {
   editor.on('PreProcess', (o) => {

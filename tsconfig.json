@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": [
+			"es2021",
+			"dom"
+		]
+  },
+  "files": [
+		"src/index.ts",
+		"src/global.d.ts"
+  ]
+}
